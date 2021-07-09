@@ -1,14 +1,25 @@
 import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import userRoutes from "./routes/userRoutes";
+import authRoutes from "./routes/authRoutes";
+import dotenv from "dotenv";
 
-export default class Server{
-    public app: express.Application;
+dotenv.config();
 
-    constructor(){
-        this.app = express();
-    }
+const app = express();
+app.set("port", process.env.PORT || 3000);
 
-    start(callback: any){
-        this.app.listen(callback);
-    }
-}
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+app.use("/api", userRoutes);
+app.use("/api", authRoutes);
+
+export default app;
