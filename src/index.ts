@@ -25,5 +25,5 @@ server.app.use('/api', authRoutes);
 server.app.use('/api', userRoutes);
 
 server.start(() => {
-    console.log(`servidor corriendo en el puerto ${process.env.PORT || server.port}`)
+    console.log(`servidor corriendo en el puerto ${process.env.PORT}`)
 });
