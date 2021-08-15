@@ -30,3 +30,13 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (username, namecomplete, email, password, ci, idrol) VALUES ('Cristhian', 'Cristhian Vargas Quiroz', 'cristhian@gmail.com', 'estudiar', 9636927, 1);
+
+create table dataSensors(
+	id serial primary key,
+	valor int not null,
+	fecha timestamp not null,
+	idUser int not null,
+	foreign key (idUser) references users(id)
+);
+
+insert into dataSensors (valor, fecha,idUser) values (38,now(),2)
