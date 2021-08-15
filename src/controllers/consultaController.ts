@@ -36,7 +36,7 @@ export const registerConsulta = async (req: Request, res: Response) => {
       },
     };
     const response: QueryResult = await pool.query(
-        "inser into consultamedica(fecha,nroreserva,iduser,iddoctor,client,email,telefono) values($1,$2,$3,$4,$5,$6,$7)",
+        "insert into consultamedica(fecha,nroreserva,iduser,iddoctor,client,email,telefono) values($1,$2,$3,$4,$5,$6,$7)",
         ['now()',nroreserva,idUser,doctorRnd,nombre,email,telefono]
     );
     if(response){
