@@ -21,3 +21,54 @@ export const userNameDuplicate = async(req: Request, res: Response, next: NextFu
     next();
     return;
 }
+
+export const doctorAleatorio = async(req: Request, res: Response) => {
+    const {username} = req.body;
+    const idResponse: QueryResult = await pool.query(
+        "select users.id from users where users.username = $1",
+        [username]
+    );
+    const idUser = idResponse.rows[0].id;
+    const doctorMax: QueryResult = await pool.query(
+        "select max(doctors.id) from doctors"
+    );
+    const max = doctorMax.rows[0].max;
+    let doctorRnd = Math.floor(Math.random() * (max - 12)) + 12;
+    return doctorRnd;
+}
+
+export const getUserId = async(req: Request, res: Response) => {
+    const {username} = req.body;
+    const response: QueryResult = await pool.query(
+        "select users.id from users where users.username = $1",
+        [username]
+    );
+    const userId = response.rows[0].id;
+    return userId;
+}
+
+export const lastReservation = async() => {
+    const response: QueryResult = await pool.query(
+        "select max(consultamedica.nroreserva) from consultamedica"
+    );
+    const maxNum = response.rows[0].max;
+    return maxNum;
+}
+
+export const getInfoDoctor = async(id: number) => {
+    const response: QueryResult = await pool.query(
+        "select doctors.nombre,doctors.telefono,doctors.idclinic from doctors where doctors.id = $1",
+        [id]
+    );
+    const infoDoctor = response.rows[0];
+    return infoDoctor;
+}
+
+export const getInfoClinic = async(id: number) => {
+    const response: QueryResult = await pool.query(
+        "select clinica.nombre,clinica.direccion from clinica where id = $1",
+        [id]
+    );
+    const infoClinic = response.rows[0];
+    return infoClinic;
+}

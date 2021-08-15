@@ -49,6 +49,8 @@ export const singin = async(req: Request, res: Response) => {
             }
         
             const name = userFound.rows[0].namecomplete;
+            const email = userFound.rows[0].email;
+            const ci = userFound.rows[0].ci;
             //creamos el token
             const token = jwt.sign({user: username}, `${process.env.SECRETKEY}`, {
                 expiresIn: 86400 //24 horas
@@ -60,6 +62,8 @@ export const singin = async(req: Request, res: Response) => {
                 token,
                 user: {
                     username,
+                    email,
+                    ci,
                     name,
                     rol
                 }

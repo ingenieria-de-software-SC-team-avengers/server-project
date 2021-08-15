@@ -7,6 +7,7 @@ import dataRoutes from "./routes/dataSensorsRoutes";
 import clinicRoutes from "./routes/clinicRoutes";
 import dotenv from "dotenv";
 import doctorRoutes from "./routes/doctorRoutes";
+import consultaRoutes from "./routes/consultaRoutes";
 
 dotenv.config();
 
@@ -27,5 +28,6 @@ app.use("/api", authRoutes);
 app.use("/api", dataRoutes);
 app.use("/api", clinicRoutes);
 app.use("/api", doctorRoutes);
+app.use("/api", consultaRoutes);
 
 export default app;

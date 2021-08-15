@@ -7,9 +7,9 @@ dotenv.config();
 
 export const registerDoctor = async(req: Request, res: Response) => {
     try {
-        const {nombre,matricula,especialidad,idclinic} = req.body;
+        const {nombre,matricula,especialidad,idclinic,telefono} = req.body;
         const response: QueryResult = await pool.query(
-            "INSERT INTO doctors(nombre,matricula,especialidad,idClinic) VALUES ($1,$2,$3,$4)",
+            "INSERT INTO doctors(nombre,matricula,especialidad,idClinic,telefono) VALUES ($1,$2,$3,$4,$5)",
             [nombre,matricula,especialidad,idclinic]
         );
     
