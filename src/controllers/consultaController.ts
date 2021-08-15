@@ -14,15 +14,16 @@ export const registerConsulta = async (req: Request, res: Response) => {
   const idUser = await verify.getUserId(req, res);
   const lastR = await verify.lastReservation();
   const infoDoc = await verify.getInfoDoctor(doctorRnd);
-  const {nombre,telefono,idclinic} = infoDoc;
+  const {doctor,celdoctor,idclinic} = infoDoc;
   const infoClinic = await verify.getInfoClinic(idclinic);
-/*   const agent = new WebhookClient({ request: req, response: res });
+  const {posta,ubicacion} = infoClinic;
+  const nroreserva = lastR + 1;
+  const agent = new WebhookClient({ request: req, response: res });
   console.log("Dialogflow Request headers: " + JSON.stringify(req.headers));
   console.log("Dialogflow Request body: " + JSON.stringify(req.body));
-  function reservarCita() {
+  async function reservarCita() {
     const fecha = req.body.queryResult.parameters.fecha;
-    const nroreserva = lastR + 1;
-    const cliente = req.body.queryResult.parameters.nombre.name;
+    const nombre = req.body.queryResult.parameters.nombre.name;
     const email = req.body.queryResult.parameters.email;
     const telefono = req.body.queryResult.parameters.telefono;
     const msg = {
@@ -30,9 +31,20 @@ export const registerConsulta = async (req: Request, res: Response) => {
       from: "cristhian_086@hotmail.com", // Change to your verified sender
       templateId: "d-5b42f625733a4d95b7ab4f4779361942",
       dynamic_template_data: {
-        
+        doctor,posta,ubicacion,celdoctor,nombre,telefono,fecha,nroreserva
       },
     };
-  } */
-  console.log();
+    const response: QueryResult = await pool.query(
+        "inser into consultamedica(fecha,nroreserva,iduser,iddoctor,client,email,telefono) values($1,$2,$3,$4,$5,$6,$7)",
+        ['now()',nroreserva,idUser,doctorRnd,nombre,email,telefono]
+    );
+    if(response){
+        console.log("datos insertados correctamente de la consulta");
+    }
+    sgMail.send(msg);
+    agent.add(`Gracias por reservar, la reserva fuen enviada a tu correo`);
+  }
+  let intentMap = new Map();
+  intentMap.set('reservarCita', reservarCita);
+  agent.handleRequest(intentMap);
 };

@@ -57,7 +57,7 @@ export const lastReservation = async() => {
 
 export const getInfoDoctor = async(id: number) => {
     const response: QueryResult = await pool.query(
-        "select doctors.nombre,doctors.telefono,doctors.idclinic from doctors where doctors.id = $1",
+        "select doctors.nombre as doctor,doctors.telefono as celDoctor,doctors.idclinic from doctors where doctors.id = $1",
         [id]
     );
     const infoDoctor = response.rows[0];
@@ -66,7 +66,7 @@ export const getInfoDoctor = async(id: number) => {
 
 export const getInfoClinic = async(id: number) => {
     const response: QueryResult = await pool.query(
-        "select clinica.nombre,clinica.direccion from clinica where id = $1",
+        "select clinica.nombre as posta,clinica.direccion as ubicacion from clinica where id = $1",
         [id]
     );
     const infoClinic = response.rows[0];
