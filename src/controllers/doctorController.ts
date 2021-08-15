@@ -10,7 +10,7 @@ export const registerDoctor = async(req: Request, res: Response) => {
         const {nombre,matricula,especialidad,idclinic,telefono} = req.body;
         const response: QueryResult = await pool.query(
             "INSERT INTO doctors(nombre,matricula,especialidad,idClinic,telefono) VALUES ($1,$2,$3,$4,$5)",
-            [nombre,matricula,especialidad,idclinic]
+            [nombre,matricula,especialidad,idclinic,telefono]
         );
     
         return res.status(200).json({

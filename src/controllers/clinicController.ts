@@ -23,3 +23,14 @@ export const resgisterClinic = async(req: Request, res: Response) => {
     }
 }
 
+export const getAllClinic = async(req: Request, res: Response) => {
+    try {
+        const response: QueryResult = await pool.query(
+            "select clinica.nombre from clinica"
+        );
+        console.log(response);
+    } catch (error) {
+        
+    }
+}
+
