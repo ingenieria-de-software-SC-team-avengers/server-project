@@ -40,3 +40,49 @@ create table dataSensors(
 );
 
 insert into dataSensors (valor, fecha,idUser) values (38,now(),2)
+
+create table clinica(
+	id serial primary key,
+	nombre varchar(100) not null,
+	direccion varchar(100) not null
+);
+
+insert into clinica(nombre,direccion) 
+values('San martin de porres','5to anillo Av moscu'),
+('Prosalud','calle heroes del chaco Av Mariscal #23'),
+('El bajio', 'Av villa ortuño 6to anillo'),
+('Perpetuo socorro','Av roca y coronado 3er anillo interno')
+
+CREATE TABLE doctors(
+	id serial primary key,
+	nombre varchar(50) not null,
+	matricula varchar(20) not null,
+	especialidad varchar(50) not null,
+	idClinic int not null,
+	foreign key (idClinic) REFERENCES clinica(id)
+);
+
+insert into doctors(nombre,matricula,especialidad,idClinic)
+values('Ariel Rios Vargas','L-188','Pediatria',1),
+('Mirtha Vizcarra Torres','L-545','Pediatria',1),
+('Bruno Alvarado Fernandes','L-632','Medicina general',1),
+('Alberto Roque Quispe','L-245','Pediatria',2),
+('Karen Cosio Avalos','L-3556','Madecina general',2),
+('Wendy Fuentes Cosio','L-745','Pediatria',2),
+('Alison Vargas Trujillo','L-821','Pediatria',3),
+('Javier Villca Torrez','L-1247','Medicina general',3),
+('Veronica Alturizaga Camacho','L-962','Pediatria',4),
+('Cristhian Luis Fernandes Caceres','L-7846','Pediatria',4)
+
+create table consultaMedica(
+	id serial primary key,
+	fecha timestamp not null,
+	nroreserva serial not null,
+	idUser int not null,
+	idDoctor int not null,
+	foreign key (idUser) REFERENCES users(id),
+	foreign key (idDoctor) references doctors(id)
+);
+
+insert into consultaMedica(fecha,nroreserva,idUser,idDoctor)
+values('now()',1547,3,4)
