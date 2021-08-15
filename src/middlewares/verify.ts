@@ -22,13 +22,7 @@ export const userNameDuplicate = async(req: Request, res: Response, next: NextFu
     return;
 }
 
-export const doctorAleatorio = async(req: Request, res: Response) => {
-    const {username} = req.body;
-    const idResponse: QueryResult = await pool.query(
-        "select users.id from users where users.username = $1",
-        [username]
-    );
-    const idUser = idResponse.rows[0].id;
+export const doctorAleatorio = async() => {
     const doctorMax: QueryResult = await pool.query(
         "select max(doctors.id) from doctors"
     );
@@ -37,8 +31,7 @@ export const doctorAleatorio = async(req: Request, res: Response) => {
     return doctorRnd;
 }
 
-export const getUserId = async(req: Request, res: Response) => {
-    const {username} = req.body;
+export const getUserId = async(username: string) => {
     const response: QueryResult = await pool.query(
         "select users.id from users where users.username = $1",
         [username]
