@@ -62,17 +62,17 @@ CREATE TABLE doctors(
 	foreign key (idClinic) REFERENCES clinica(id)
 );
 
-insert into doctors(nombre,matricula,especialidad,idClinic)
-values('Ariel Rios Vargas','L-188','Pediatria',1),
-('Mirtha Vizcarra Torres','L-545','Pediatria',1),
-('Bruno Alvarado Fernandes','L-632','Medicina general',1),
-('Alberto Roque Quispe','L-245','Pediatria',2),
-('Karen Cosio Avalos','L-3556','Madecina general',2),
-('Wendy Fuentes Cosio','L-745','Pediatria',2),
-('Alison Vargas Trujillo','L-821','Pediatria',3),
-('Javier Villca Torrez','L-1247','Medicina general',3),
-('Veronica Alturizaga Camacho','L-962','Pediatria',4),
-('Cristhian Luis Fernandes Caceres','L-7846','Pediatria',4)
+insert into doctors(nombre,matricula,especialidad,idClinic,telefono)
+values('Ariel Rios Vargas','L-188','Pediatria',1,78588493),
+('Mirtha Vizcarra Torres','L-545','Pediatria',1,78412562),
+('Bruno Alvarado Fernandes','L-632','Medicina general',1,75124536),
+('Alberto Roque Quispe','L-245','Pediatria',2,65894512),
+('Karen Cosio Avalos','L-3556','Madecina general',2,69325147),
+('Wendy Fuentes Cosio','L-745','Pediatria',2,78412593),
+('Alison Vargas Trujillo','L-821','Pediatria',3,78124569),
+('Javier Villca Torrez','L-1247','Medicina general',3,67895412),
+('Veronica Alturizaga Camacho','L-962','Pediatria',4,71002548),
+('Cristhian Luis Fernandes Caceres','L-7846','Pediatria',4,69741258)
 
 create table consultaMedica(
 	id serial primary key,
@@ -84,5 +84,5 @@ create table consultaMedica(
 	foreign key (idDoctor) references doctors(id)
 );
 
-insert into consultaMedica(fecha,nroreserva,idUser,idDoctor)
-values('now()',1547,3,4)
+insert into consultaMedica(fecha,nroreserva,idUser,idDoctor,client,email,telefono)
+values('now()',1547,3,15,'Cristhian Vargas Quiroz','cristhianingsis@gmail.com',78588196)
