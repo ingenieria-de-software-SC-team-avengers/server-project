@@ -34,13 +34,13 @@ export const registerConsulta = async (req: Request, res: Response) => {
         doctor,posta,ubicacion,celdoctor,nombre,telefono,fecha,nroreserva
       },
     };
-    const response: QueryResult = await pool.query(
+/*     const response: QueryResult = await pool.query(
         "inser into consultamedica(fecha,nroreserva,iduser,iddoctor,client,email,telefono) values($1,$2,$3,$4,$5,$6,$7)",
         ['now()',nroreserva,idUser,doctorRnd,nombre,email,telefono]
     );
     if(response){
         console.log("datos insertados correctamente de la consulta");
-    }
+    } */
     sgMail.send(msg);
     agent.add(`Gracias por reservar, la reserva fuen enviada a tu correo`);
   }
