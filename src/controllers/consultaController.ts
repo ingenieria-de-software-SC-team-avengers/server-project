@@ -11,8 +11,8 @@ dotenv.config();
 
 export const registerConsulta = async (req: Request, res: Response) => {
   const agent = new WebhookClient({ request: req, response: res });
-  console.log("Dialogflow Request headers: " + JSON.stringify(req.headers));
-  console.log("Dialogflow Request body: " + JSON.stringify(req.body));
+  //console.log("Dialogflow Request headers: " + JSON.stringify(req.headers));
+  //console.log("Dialogflow Request body: " + JSON.stringify(req.body));
   async function reservarCita() {
     const username = req.body.queryResult.parameters.username.name;
     let doctorRnd = await verify.doctorAleatorio();
@@ -24,7 +24,7 @@ export const registerConsulta = async (req: Request, res: Response) => {
     const {posta,ubicacion} = infoClinic;
     const nroreserva = lastR + 1;
     const fecha = req.body.queryResult.parameters.fecha;
-    const nombre = req.body.queryResult.parameters.nombre.name;
+    const nombre = req.body.queryResult.parameters.nombre[0].name;
     console.log(nombre);
     const email = req.body.queryResult.parameters.email;
     const telefono = req.body.queryResult.parameters.telefono;
