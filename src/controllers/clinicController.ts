@@ -28,9 +28,12 @@ export const getAllClinic = async(req: Request, res: Response) => {
         const response: QueryResult = await pool.query(
             "select clinica.nombre from clinica"
         );
-        console.log(response);
+        const clinics = response.rows;
+        return res.status(200).json(clinics);
     } catch (error) {
-        
+        return res.status(500).json({
+            message: "Error al obtener las clinicas"
+        });
     }
 }
 

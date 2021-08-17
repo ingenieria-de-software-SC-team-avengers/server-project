@@ -49,3 +49,8 @@ export const registerConsulta = async (req: Request, res: Response) => {
   intentMap.set('reservarCita', reservarCita);
   agent.handleRequest(intentMap);
 };
+
+export const reservarConsulta = async(req: Request, res: Response) => {
+    const {username,client,email,telefono} = req.body;
+    
+}
