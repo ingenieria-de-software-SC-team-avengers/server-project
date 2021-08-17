@@ -26,7 +26,7 @@ export const registerDoctor = async(req: Request, res: Response) => {
 export const getAllDoctors = async(req: Request, res: Response) => {
     try {
         const response: QueryResult = await pool.query(
-            "select doctors.nombre,doctors.matricula,doctors.especialidad,doctors.telefono,clinica.nombre as clinica,clinica.id as idClinica from doctors,clinica where doctors.idclinic = clinica.id"
+            "select doctors.nombre,doctors.matricula,doctors.especialidad,doctors.telefono,clinica.nombre as clinica,doctors.idclinic as idClinica from doctors,clinica where doctors.idclinic = clinica.id"
         );
         const doctors = response.rows;
         return res.status(200).json(doctors);

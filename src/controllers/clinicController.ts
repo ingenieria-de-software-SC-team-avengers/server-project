@@ -26,7 +26,7 @@ export const resgisterClinic = async(req: Request, res: Response) => {
 export const getAllClinic = async(req: Request, res: Response) => {
     try {
         const response: QueryResult = await pool.query(
-            "select clinica.nombre,clinica.direccion from clinica"
+            "select clinica.id as idclinic,clinica.nombre,clinica.direccion from clinica"
         );
         const clinics = response.rows;
         return res.status(200).json(clinics);
