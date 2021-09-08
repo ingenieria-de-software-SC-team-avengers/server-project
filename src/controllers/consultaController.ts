@@ -29,7 +29,7 @@ export const registerConsulta = async (req: Request, res: Response) => {
     const telefono = req.body.queryResult.parameters.telefono;
     const msg = {
       to: email, // Change to your recipient
-      from: "cristhian_086@hotmail.com", // Change to your verified sender
+      from: "matikid88@gmail.com", // Change to your verified sender
       templateId: "d-5b42f625733a4d95b7ab4f4779361942",
       dynamic_template_data: {
         doctor,posta,ubicacion,celdoctor,nombre,telefono,fecha,nroreserva
@@ -43,7 +43,7 @@ export const registerConsulta = async (req: Request, res: Response) => {
         console.log("datos insertados correctamente de la consulta");
     }
     sgMail.send(msg);
-    agent.add(`Gracias por reservar, la reserva fuen enviada a tu correo`);
+    agent.add(`Gracias por reservar, la reserva fuen enviada a tu correo o tambien contactarse via whatsapp wa.me/59176672651`);
   }
   let intentMap = new Map();
   intentMap.set('reservarCita', reservarCita);
