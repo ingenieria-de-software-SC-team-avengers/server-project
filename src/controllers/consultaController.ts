@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import { pool } from "../database";
-import { QueryResult } from "pg";
-import * as verify from "../middlewares/verify";
-import dotenv from "dotenv";
 import { WebhookClient } from "dialogflow-fulfillment";
+import dotenv from "dotenv";
+import { Request, Response } from "express";
+import { QueryResult } from "pg";
+import { pool } from "../database";
+import * as verify from "../middlewares/verify";
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -43,7 +43,7 @@ export const registerConsulta = async (req: Request, res: Response) => {
         console.log("datos insertados correctamente de la consulta");
     }
     sgMail.send(msg);
-    agent.add(`Gracias por reservar, la reserva fuen enviada a tu correo o tambien contactarse via whatsapp wa.me/59176672651`);
+    agent.add(`Gracias por reservar, la reserva fuen enviada a tu correo o tambien contactarse via whatsapp https://wa.me/59176672651`);
   }
   let intentMap = new Map();
   intentMap.set('reservarCita', reservarCita);
