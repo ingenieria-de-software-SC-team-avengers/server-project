@@ -36,3 +36,19 @@ export const getAllDoctors = async(req: Request, res: Response) => {
         });
     }
 }
+
+export const getDoctorsClinic = async(req: Request, res: Response) => {
+    try {
+        const idclinic = req.params.clinic;
+        const response: QueryResult = await pool.query(
+            "select doctors.nombre, doctors.especialidad, doctors.telefono from doctors, clinica where doctors.idclinic = clinica.id and clinica.id = $1", [idclinic]
+        );
+        const doctorsclinic = response.rows;
+        return res.status(200).json(doctorsclinic);
+    } catch (error) {
+        return res.status(500).json({
+            message: "error al obtener los doctores de la clinica"
+        });
+    }
+
+}
