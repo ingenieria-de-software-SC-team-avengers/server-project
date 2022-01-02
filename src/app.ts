@@ -8,6 +8,7 @@ import clinicRoutes from "./routes/clinicRoutes";
 import dotenv from "dotenv";
 import doctorRoutes from "./routes/doctorRoutes";
 import consultaRoutes from "./routes/consultaRoutes";
+import sequelize from "./utils/sequelize";
 
 dotenv.config();
 
@@ -19,9 +20,24 @@ app.use(cors({
     credentials: true
 }));
 
+//DATA BASE CONNECTION
+sequelize.authenticate()
+    .then(async () => {
+        await sequelize.sync({logging: true});
+        console.log(`Conectado a la base de datos`);
+    }
+).catch((error) => {
+    console.error(error);
+    process.exit(0);
+});
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+app.get("/", (_, res) => {
+    res.send("<h1>Welcome to my API 🥵</h1>");
+});
 
 app.use("/api", userRoutes);
 app.use("/api", authRoutes);

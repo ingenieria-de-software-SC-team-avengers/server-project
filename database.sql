@@ -74,7 +74,7 @@ values('Ariel Rios Vargas','L-188','Pediatria',1,78588493),
 ('Veronica Alturizaga Camacho','L-962','Pediatria',4,71002548),
 ('Cristhian Luis Fernandes Caceres','L-7846','Pediatria',4,69741258)
 
-create table consultaMedica(
+create table ReservaMedica(
 	id serial primary key,
 	fecha timestamp not null,
 	nroreserva serial not null,
@@ -84,5 +84,12 @@ create table consultaMedica(
 	foreign key (idDoctor) references doctors(id)
 );
 
-insert into consultaMedica(fecha,nroreserva,idUser,idDoctor,client,email,telefono)
+insert into ReservaMedica(fecha,nroreserva,idUser,idDoctor)
 values('now()',1547,3,15,'Cristhian Vargas Quiroz','cristhianingsis@gmail.com',78588196)
+
+create table Histories(
+	id serial primary key,
+	details varchar(100) not null,
+	fecha date not null,
+	foreign key (idReserva) references ReservaMedica(id)
+);
