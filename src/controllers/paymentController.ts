@@ -21,7 +21,7 @@ export const createPayment = async(req: Request, res: Response) => {
         metadata: {
             customer_name: 'Cliente'
         },
-        redirect_url: 'https://temperatureappweb.netlify.app/client/home'
+        redirect_url: 'https://tempsimple.netlify.app/client/home'
         
     };
     const charge = await Charge.create(chargeData);
