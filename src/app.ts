@@ -8,6 +8,7 @@ import clinicRoutes from "./routes/clinicRoutes";
 import dotenv from "dotenv";
 import doctorRoutes from "./routes/doctorRoutes";
 import consultaRoutes from "./routes/consultaRoutes";
+import paymentRoutes from "./routes/paymentRoutes";
 import sequelize from "./utils/sequelize";
 
 dotenv.config();
@@ -45,5 +46,6 @@ app.use("/api", dataRoutes);
 app.use("/api", clinicRoutes);
 app.use("/api", doctorRoutes);
 app.use("/api", consultaRoutes);
+app.use("/api", paymentRoutes);
 
 export default app;
